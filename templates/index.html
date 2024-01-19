@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uptime Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="Experience unparalleled performance, superior reliability, and exceptional support for your Minecraft server hosting needs. Our services are tailored to make your gaming community thrive for free!">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Croix - Homepage">
+    <meta property="og:description" content="Experience unparalleled performance, superior reliability, and exceptional support for your Minecraft server hosting needs. Our services are tailored to make your gaming community thrive for free!">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/1132348455965167696/1145757392311693412/image.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Croix - Homepage">
+    <meta property="twitter:description" content="Experience unparalleled performance, superior reliability, and exceptional support for your Minecraft server hosting needs. Our services are tailored to make your gaming community thrive for free!">
+    <meta property="twitter:image" content="https://media.discordapp.net/attachments/1132348455965167696/1145757392311693412/image.png">
+    <style>
+        body {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="mb-6">
+        <div class="bg-blue-500 p-3 rounded-lg">
+            <p class="text-lg">{{ announcement_text }}</p>
+        </div>
+    </div>
+   <div id="alert-container" class="hidden p-3 rounded-lg">
+    <p class="text-lg" id="alert-text"></p>
+    <button onclick="dismissAlert()" class="font-bold">Dismiss</button>
+</div>
+</div>
+</div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-semibold mb-4">Uptime Monitor</h1>
+        <ul>
+            {% for ip in ip_addresses %}
+            <li>
+                <div class="flex justify-between items-center">
+                    <div>
+                        {{ ip["name"] }}: 
+                        {% if last_ping_statuses[ip["ip"]] == "Online" %}
+                        <span class="text-green-500">Online</span>
+                        {% else %}
+                        <span class="text-red-500">Offline</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        Daily Check: {{ daily_percentages[ip["ip"]]|default('N/A') }}%
+                    </div>
+                </div>
+                <div class="relative pt-1">
+                    <div class="flex mb-2 items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">
+                                <i class="fa-solid fa-arrow-up"></i> Uptime
+                            </span>
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
+                                Online Days
+                            </span>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-semibold inline-block text-teal-600">
+                                {{ daily_percentages[ip["ip"]]|default('N/A') }}%
+                            </span>
+                            <span class="text-xs font-semibold inline-block text-green-600">
+                                {{ online_days[ip["ip"]]|default(0) }} days
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex h-2 mb-4 overflow-hidden text-xs bg-teal-200">
+                        <div style="width:{{ daily_percentages[ip["ip"]]|default(0) }}%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-teal-500"></div>
+                    </div>
+                </div>
+                
+            </li>
+            <hr>
+            <br>
+            <br>
+            {% endfor %}
+        </ul>
+    </div>
+    <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#" class="hover:underline">Made By SastaFlash</a>. All Rights Reserved.
+        </span>
+        <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+
+            <li>
+                <a href="https://github.com/SwaritMisro12" class="mr-4 hover:underline md:mr-6">SastaFlash Github</a>
+            </li>
+        </ul>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/status');
+
+        socket.on('update_status', function(data) {
+            // Update status text
+            var statusText = document.getElementById('status-' + data.ip);
+            if (statusText) {
+                statusText.innerText = data.status;
+            }
+
+            // Display alert for both online and offline hosts
+            var alertText = document.getElementById('alert-text');
+            if (data.status === 'Offline') {
+                alertText.innerText = 'Host ' + data.ip + ' is offline!';
+                document.getElementById('alert-container').classList.remove('hidden');
+            } else if (data.status === 'Online') {
+                alertText.innerText = 'Host ' + data.ip + ' is back online!';
+                document.getElementById('alert-container').classList.remove('hidden');
+            } else {
+                document.getElementById('alert-container').classList.add('hidden');
+            }
+        });
+
+        function dismissAlert() {
+            document.getElementById('alert-container').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
