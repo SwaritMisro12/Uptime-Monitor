@@ -16,7 +16,7 @@ To set up the project for local development, follow these steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/YourUsername/Uptime-Monitor.git
+    git clone https://github.com/SwaritMisro12/Uptime-Monitor.git
     ```
 
 2. Navigate to the project directory:
