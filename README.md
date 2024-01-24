@@ -67,6 +67,36 @@ Include information about how users can use your application, configure settings
 
 If you would like to contribute to the project, please follow the [Contributing Guidelines](CONTRIBUTING.md).
 
+
+
+### New Features 🆕
+
+#### 1. SendGrid Email System 📧
+
+Explain how the SendGrid email system works, how users can configure it, and what benefits it brings to the Uptime Monitor.
+
+#### 2. Updated Frontend 🌐
+
+Highlight the changes in the updated frontend, provide screenshots if applicable, and guide users on any new functionalities or improvements.
+
+#### 3. Multiple IP Detection 🌐🌐
+
+Explain how the system now supports multiple IP detection and how users can leverage this feature for monitoring their servers.
+
+#### 4. Reports and Outages 🔍🚨
+
+Give details about the new reporting system and how users can access and interpret outage reports.
+
+### Upcoming Features 🚀
+
+Provide a brief overview of features that are in development or planned for future releases, such as any upcoming outage-related features.
+
+### How to Get Involved 🤝
+
+Encourage users to contribute to the project by providing a link to the Contributing Guidelines and explaining how they can get involved in the development process.
+
+Including this information will enhance the transparency and accessibility of your project, making it more user-friendly and encouraging community participation.
+
 ## Copyright and License ©️
 
 This project is licensed under the [MIT License](LICENSE). All copyrights are retained by the contributors. Removing or altering the copyright information without permission may result in legal action.
