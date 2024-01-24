@@ -97,6 +97,11 @@ Encourage users to contribute to the project by providing a link to the Contribu
 
 Including this information will enhance the transparency and accessibility of your project, making it more user-friendly and encouraging community participation.
 
+
+### Discord Webbot System 🤖🔗
+
+The Uptime Monitor now supports a Discord webbot system, allowing you to receive notifications and updates directly in your Discord server.
+
 ## Copyright and License ©️
 
 This project is licensed under the [MIT License](LICENSE). All copyrights are retained by the contributors. Removing or altering the copyright information without permission may result in legal action.
