@@ -19,3 +19,6 @@ function updateStatus() {
 // Update status every 10 seconds
 setInterval(updateStatus, 10000);  // 10 seconds
 updateStatus();
+
+
+
